@@ -1,0 +1,83 @@
+1) ho creato 2 unità organizzative :
+marketing e logistica 
+dentro a marketing : ho messo 2 utenti ,Thiago Rosa e Guilherme barbosa , dopo ho creato all'interno un gruppo chiamato logistica suprema : dove ho messo eriberto goncalves
+dentro a logistica : eriberto goncalves e pimentinha dos santos , dopo ho creato all'interno un gruppo chiamato marketing secreto : dove ho messo thiago rosa.
+e un gruppo chiamato marketing fraco : dove ho messo guilherme barbosa 
+2) su disco locale ho creato due cartelle projeto de vendas e total de ingresso vendidos .
+per quanto riguarda projeto de vendas, ho garantito agli utenti del gruppo logistica supremà , il massimo dei privilegi (full controll), mentre al gruppo logicstica ruim ho garantito solo il permesso di lettura
+per quanto riguarda la cartella total de ingresso vendidos: ho garantito il massimo dei privilegi(full controll) al gruppo marketing secretò , mentre al gruppo marketing fraco , ho dato solo il permesso di lettura.
+
+esercizio 2)
+Passo 1: Aprire Group Policy Management
+Premi Win + R per aprire la finestra Run.
+Digita gpmc.msc e premi Enter.
+Si aprirà la console di Group Policy Management.
+Passo 2: Creare o modificare una Group Policy Object (GPO)
+Nella console di Group Policy Management, espandi il dominio (es. yourdomain.local).
+Clic destro su "Group Policy Objects", quindi seleziona "New" per creare una nuova GPO.
+ho inserito il  un nome significativo, ad esempio: accesso.
+Dopo aver creato la GPO, fai clic destro su di essa e seleziona "Edit" per modificarla.
+Passo 3: Accedere alle Software Restriction Policies
+Nella finestra Group Policy Management Editor, naviga a:
+
+User Configuration → Policies → Windows Settings → Security Settings → Software Restriction Policies
+Se nella cartella Software Restriction Policies non ci sono policy configurate, fai clic destro e seleziona "New Software Restriction Policies".
+
+Dopo aver selezionato questa opzione, appariranno due nuove sezioni:
+Security Levels
+Additional Rules
+Passo 4: Impostare il livello di sicurezza predefinito
+Clicca su "Security Levels", dove troverai tre opzioni:
+
+Unrestricted (Consente l'esecuzione di tutti i programmi).
+Disallowed (Blocca l'esecuzione di tutti i programmi tranne quelli specificati nelle regole).
+Basic User (Esegue i programmi senza privilegi amministrativi).
+Doppio clic su "Disallowed", quindi clicca su "Set as Default" → premi "OK".
+
+Questo bloccherà l'esecuzione di tutti i programmi a meno che non vengano specificate eccezioni nelle regole aggiuntive.
+Passo 5: Creare regole per consentire applicazioni specifiche
+Vai alla sezione "Additional Rules".
+
+Clic destro in un'area vuota e seleziona "New Path Rule" per creare una nuova regola basata sul percorso.
+
+Inserisci il percorso dell'applicazione che desideri consentire, ad esempio:
+
+Bloccare PowerShell:
+Path: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Security Level: Disallowed
+Description: "Block PowerShell "
+
+gpupdate /force su power shell (per aggiornare le regole di policy)
+
+3)Premi Win + R, digita gpmc.msc e premi Enter per aprire Group Policy Management.
+
+Espandi il dominio, clic destro su Group Policy Objects, e seleziona "New" per creare una nuova GPO.
+
+Nome suggerito: System Settings Restrictions.
+Clic destro sulla nuova GPO e seleziona "Edit".
+
+Vai su:
+
+
+Computer Configuration → Policies → Windows Settings → Security Settings → Local Policies → User Rights Assignment
+Qui trovi diverse impostazioni per concedere o revocare i diritti di amministrazione, come:
+
+"Change the system time" → Per permettere o negare la modifica dell'ora e data.
+
+
+Doppio clic sull'impostazione desiderata.
+Clicca su "Add User or Group".
+Inserisci il nome del gruppo, 
+Clicca su "OK" per applicare
+
+4)esercizio 4 Accesso remoto al server
+Per consentire l'accesso remoto tramite Remote Desktop (RDP):
+
+Passaggi:
+
+Apri gpedit.msc o la console di gestione remota.
+Vai su:
+Configurazione computer → Criteri → Modelli amministrativi → Componenti di Windows → Servizi desktop remoto → Host sessione desktop remoto → Connessioni.
+Abilita l’opzione "Consenti agli utenti di connettersi".
+Vai su Sistema → Impostazioni avanzate → Accesso remoto → Aggiungi il gruppo agli utenti autorizzati.
+Apri il firewall (wf.msc) e assicurati che la porta 3389 sia aperta per le connessioni RDP.
